@@ -6,13 +6,15 @@ def options(opt):
 
 def configure(cfg):
     cfg.load('g++')
-    cfg.env.INCLUDES_GTEST = ['include', '.']
-    cfg.env.LIB_GTEST      = ['pthread']
+    cfg.env.LIB_PTHREAD = ['pthread']
+    cfg.env.CXXFLAGS_PTHREAD = ['-pthread']
 
 def build(bld):
     bld.stlib(
-        target   = 'gtest',
-        source   = bld.path.ant_glob('src/*.cc'),
-        use      = ['GTEST'],
-        cxxflags = ['-Wall', '-Wextra'],
+        target          = 'gtest',
+        source          = bld.path.ant_glob('src/*.cc'),
+        use             = ['PTHREAD'],
+        includes        = ['include', '.'],
+        export_includes = ['include'],
+        cxxflags        = ['-Wall', '-Wextra'],
     )
