@@ -2,12 +2,11 @@
 import sys, os
 
 def options(opt):
-    opt.load('g++')
+    opt.load('compiler_cxx')
 
 def configure(cfg):
-    cfg.load('g++')
-    cfg.env.LIB_PTHREAD = ['pthread']
-    cfg.env.CXXFLAGS_PTHREAD = ['-pthread']
+    cfg.load('compiler_cxx')
+    cfg.check_cxx(lib='pthread', cxxflags='-pthread')
 
 def build(bld):
     bld.stlib(
